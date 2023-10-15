@@ -45,32 +45,18 @@
 
 // export default App;
 
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import About from './pages/About';
 import Error from './pages/Error';
 import Faq from './pages/Faq';
-import Header from './components/Header';
 import Home from './pages/Home';
 
 const router = createBrowserRouter([
-	{
-		path: '/',
-		element: (
-			<div>
-				<Header />
-				<div>
-					<Outlet />
-				</div>
-			</div>
-		),
-		children: [
-			{ index: true, element: <Home /> },
-			{ path: 'about', element: <About /> },
-			{ path: 'faq', element: <Faq /> },
-			{ path: '*', element: <Error /> },
-		],
-	},
+	{ index: '/', element: <Home /> },
+	{ path: 'about', element: <About /> },
+	{ path: 'faq', element: <Faq /> },
+	{ path: '*', element: <Error /> },
 ]);
 
 const App = () => {
