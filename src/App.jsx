@@ -45,22 +45,26 @@
 
 // export default App;
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import About from './pages/About';
 import Error from './pages/Error';
 import Faq from './pages/Faq';
+import Header from './components/Header';
 import Home from './pages/Home';
 
-const router = createBrowserRouter([
-	{ index: '/', element: <Home /> },
-	{ path: '/about', element: <About /> },
-	{ path: '/faq', element: <Faq /> },
-	{ path: '*', element: <Error /> },
-]);
-
 const App = () => {
-	return <RouterProvider router={router} />;
+	return (
+		<div>
+			<Header />
+			<Routes>
+				<Route path='/' exact element={<Home />} />
+				<Route path='/about' element={<About />} />
+				<Route path='/faq' element={<Faq />} />
+				<Route path='*' element={<Error />} />
+			</Routes>
+		</div>
+	);
 };
 
 export default App;
