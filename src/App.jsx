@@ -50,7 +50,6 @@ import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import About from './pages/About';
 import Error from './pages/Error';
 import Faq from './pages/Faq';
-import { FilterProvider } from './components/FilterContext';
 import Header from './components/Header';
 import Home from './pages/Home';
 
@@ -58,12 +57,12 @@ const router = createBrowserRouter([
 	{
 		path: '/',
 		element: (
-			<FilterProvider>
+			<div>
 				<Header />
 				<div>
 					<Outlet />
 				</div>
-			</FilterProvider>
+			</div>
 		),
 		children: [
 			{ index: true, element: <Home /> },
