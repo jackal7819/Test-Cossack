@@ -45,12 +45,7 @@
 
 // export default App;
 
-import {
-	HashRouter,
-	Outlet,
-	RouterProvider,
-	createBrowserRouter,
-} from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import About from './pages/About';
 import Error from './pages/Error';
@@ -79,13 +74,7 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-	return (
-		<RouterProvider router={router}>
-			<HashRouter>
-				<Outlet />
-			</HashRouter>
-		</RouterProvider>
-	);
+	return <RouterProvider router={router} />;
 };
 
 export default App;
