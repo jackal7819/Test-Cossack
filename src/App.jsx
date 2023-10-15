@@ -45,26 +45,51 @@
 
 // export default App;
 
-import { Route, Routes } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 
-import About from './pages/About';
-import Error from './pages/Error';
-import Faq from './pages/Faq';
-import Header from './components/Header';
-import Home from './pages/Home';
+const LazyAbout = lazy(() => import('./pages/About'));
+const LazyError = lazy(() => import('./pages/Error'));
+const LazyFaq = lazy(() => import('./pages/Faq'));
+const LazyHome = lazy(() => import('./pages/Home'));
+
+const router = createBrowserRouter([
+	{
+		index: '/',
+		element: (
+			<Suspense fallback={<div>Loading...</div>}>
+				<LazyHome />
+			</Suspense>
+		),
+	},
+	{
+		path: '/about',
+		element: (
+			<Suspense fallback={<div>Loading...</div>}>
+				<LazyAbout />
+			</Suspense>
+		),
+	},
+	{
+		path: '/faq',
+		element: (
+			<Suspense fallback={<div>Loading...</div>}>
+				<LazyFaq />
+			</Suspense>
+		),
+	},
+	{
+		path: '*',
+		element: (
+			<Suspense fallback={<div>Loading...</div>}>
+				<LazyError />
+			</Suspense>
+		),
+	},
+]);
 
 const App = () => {
-	return (
-		<div>
-			<Header />
-			<Routes>
-				<Route path='/' exact element={<Home />} />
-				<Route path='/about' element={<About />} />
-				<Route path='/faq' element={<Faq />} />
-				<Route path='*' element={<Error />} />
-			</Routes>
-		</div>
-	);
+	return <RouterProvider router={router} />;
 };
 
 export default App;
