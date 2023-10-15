@@ -45,46 +45,31 @@
 
 // export default App;
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-const LazyAbout = lazy(() => import('./pages/About'));
-const LazyError = lazy(() => import('./pages/Error'));
-const LazyFaq = lazy(() => import('./pages/Faq'));
-const LazyHome = lazy(() => import('./pages/Home'));
+import About from './pages/About';
+import Error from './pages/Error';
+import Faq from './pages/Faq';
+import Header from './components/Header';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
 	{
-		index: '/',
+		path: '/',
 		element: (
-			<Suspense fallback={<div>Loading...</div>}>
-				<LazyHome />
-			</Suspense>
+			<div>
+				<Header />
+				<div>
+					<Outlet />
+				</div>
+			</div>
 		),
-	},
-	{
-		path: '/about',
-		element: (
-			<Suspense fallback={<div>Loading...</div>}>
-				<LazyAbout />
-			</Suspense>
-		),
-	},
-	{
-		path: '/faq',
-		element: (
-			<Suspense fallback={<div>Loading...</div>}>
-				<LazyFaq />
-			</Suspense>
-		),
-	},
-	{
-		path: '*',
-		element: (
-			<Suspense fallback={<div>Loading...</div>}>
-				<LazyError />
-			</Suspense>
-		),
+		children: [
+			{ index: true, element: <Home /> },
+			{ path: 'about', element: <About /> },
+			{ path: 'faq', element: <Faq /> },
+			{ path: '*', element: <Error /> },
+		],
 	},
 ]);
 
