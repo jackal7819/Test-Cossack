@@ -54,8 +54,8 @@ import Home from './pages/Home';
 
 const router = createBrowserRouter([
 	{ index: '/', element: <Home /> },
-	{ path: 'about', element: <About /> },
-	{ path: 'faq', element: <Faq /> },
+	{ path: '/about', element: <About /> },
+	{ path: '/faq', element: <Faq /> },
 	{ path: '*', element: <Error /> },
 ]);
 
